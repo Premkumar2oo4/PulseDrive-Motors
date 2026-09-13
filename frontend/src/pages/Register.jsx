@@ -1,61 +1,49 @@
 import { useState } from "react";
-import {
-  Link,
-  useNavigate,
-} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
 
 function Register() {
   const navigate = useNavigate();
 
-  const { register } =
-    useAuth();
+  const { register } = useAuth();
 
-  const [form, setForm] =
-    useState({
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      phone: "",
-    });
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    phone: "",
+    address: "",
+  });
 
-  const [error, setError] =
-    useState("");
+  const [error, setError] = useState("");
 
-  const [loading, setLoading] =
-    useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (event) => {
     setForm({
       ...form,
-      [event.target.name]:
-        event.target.value,
+      [event.target.name]: event.target.value,
     });
   };
 
-  const handleSubmit =
-    async (event) => {
-      event.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-      try {
-        setLoading(true);
-        setError("");
+    try {
+      setLoading(true);
+      setError("");
 
-        await register(form);
+      await register(form);
 
-        navigate("/login");
-      } catch (error) {
-        setError(
-          error.response?.data
-            ?.message ||
-            "Unable to register."
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
+      navigate("/login");
+    } catch (error) {
+      setError(error.response?.data?.message || "Unable to register.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <main
@@ -77,14 +65,9 @@ function Register() {
           backdrop-blur-xl
         "
       >
-        <Link
-          to="/"
-          className="text-2xl font-black"
-        >
+        <Link to="/" className="text-2xl font-black">
           Pulse
-          <span className="text-blue-400">
-            Drive
-          </span>
+          <span className="text-blue-400">Drive</span>
         </Link>
 
         <h1
@@ -98,8 +81,7 @@ function Register() {
         </h1>
 
         <p className="mt-3 text-zinc-500">
-          Join PulseDrive and discover
-          your next vehicle.
+          Join PulseDrive and discover your next vehicle.
         </p>
 
         {error && (
@@ -129,21 +111,19 @@ function Register() {
             ["firstName", "First name", "text"],
             ["lastName", "Last name", "text"],
             ["email", "Email", "email"],
-            ["phone", "Phone", "text"],
-          ].map(
-            ([name, label, type]) => (
-              <div key={name}>
-                <label className="text-xs text-zinc-400">
-                  {label}
-                </label>
+            ["phone", "Phone", "tel"],
+            ["address", "Address", "text"],
+          ].map(([name, label, type]) => (
+            <div key={name}>
+              <label className="text-xs text-zinc-400">{label}</label>
 
-                <input
-                  type={type}
-                  name={name}
-                  value={form[name]}
-                  onChange={handleChange}
-                  required
-                  className="
+              <input
+                type={type}
+                name={name}
+                value={form[name]}
+                onChange={handleChange}
+                required
+                className="
                     mt-2 w-full
                     rounded-xl
                     border border-white/10
@@ -152,15 +132,12 @@ function Register() {
                     outline-none
                     focus:border-blue-400/60
                   "
-                />
-              </div>
-            )
-          )}
+              />
+            </div>
+          ))}
 
           <div className="sm:col-span-2">
-            <label className="text-xs text-zinc-400">
-              Password
-            </label>
+            <label className="text-xs text-zinc-400">Password</label>
 
             <input
               type="password"
@@ -192,9 +169,7 @@ function Register() {
               disabled:opacity-50
             "
           >
-            {loading
-              ? "Creating account..."
-              : "Create Account"}
+            {loading ? "Creating account..." : "Create Account"}
           </button>
         </form>
 
@@ -205,11 +180,7 @@ function Register() {
           "
         >
           Already registered?{" "}
-
-          <Link
-            to="/login"
-            className="text-blue-400"
-          >
+          <Link to="/login" className="text-blue-400">
             Sign in
           </Link>
         </p>
