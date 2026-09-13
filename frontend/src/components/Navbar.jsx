@@ -23,11 +23,14 @@ function Navbar() {
       <Link
         to="/"
         className="
-          font-black tracking-[-1px]
-          text-2xl
+          flex items-center
         "
       >
-        Pulse<span className="text-blue-400">Drive</span>
+        <img
+          src="/LOGO.png"
+          alt="PulseDrive"
+          className="h-auto w-[170px]"
+        />
       </Link>
 
       <div className="hidden items-center gap-8 lg:flex">
