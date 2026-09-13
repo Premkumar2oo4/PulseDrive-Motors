@@ -15,7 +15,7 @@ function Navbar() {
         flex h-[82px] w-full
         items-center justify-between
         border-b border-white/10
-        bg-grey
+        bg-[#050607]/75
         px-[6%]
         backdrop-blur-xl
       "
